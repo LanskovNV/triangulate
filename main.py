@@ -1,5 +1,8 @@
 import argparse
 import csv
+import numpy as np
+
+from ear import Ear
 
 
 def register_launch_arguments():
@@ -26,52 +29,32 @@ def save_ans(output_file, triangles, error):
         writer = csv.writer(output)
         writer.writerows(data)
 
-
 # vertices shoutd go in counterclock-wise
 def earcut(vertices):
+    length = len(vertices)
     triangles = []
     ears = []
 
-    def convert_bounds(ind):
-        length = len(vertices)
-        right_neighbour_ind = (ind + 1) % length
-        if ind == 0:
-            left_neighbour_ind = length - 1
-        else: 
-            left_neighbour_ind = ind - 1
-        return left_neighbour_ind, right_neighbour_ind
-
-    def find_all_ears():
+    def find_ears():
         i = 0
-        length = len(vertices)
         while True:
             if i >= length:
                 break
-            if is_convex(vertices[i]): 
-                ears.append(i)
-                i += 2
+            new_ear = Ear(vertices, i)
+            if (new_ear.validate()):
+                ears.append(new_ear)
+            i += 2
 
-    def is_convex(vert):
-        return True
-
-    def update_ears(ind):
-        left_neighbour_ind, right_neighbour_ind = convert_bounds(ind)
-        if is_convex(vertices[left_neighbour_ind]):
-            ears.append(left_neighbour_ind)
-            return
-        if is_convex(vertices[right_neighbour_ind]):
-            ears.append(right_neighbour_ind)
-            return
-
-    def add_triangle(ind):
-        left_neighbour_ind, right_neighbour_ind = convert_bounds(ind)
-        triangles.append([left_neighbour_ind, ind, right_neighbour_ind])
+    
+    def update_ears(ear):
+        pass
 
     def cut_ear():
-        ear_ind = ears.pop(0)
-        add_triangle(ear_ind)
-        update_ears(ear_ind)
+        ear = ears.pop(0)
+        triangles.append(ear.get_triangle())
+        update_ears(ear)
 
+    # main triangulation block
     find_all_ears()
     while True:
         if len(ears) == 1:
