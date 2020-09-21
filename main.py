@@ -5,7 +5,7 @@ from earcut import Earcut
 
 def register_launch_arguments():
     parser = argparse.ArgumentParser(description='Serve the app')
-    parser.add_argument('-i', '--input', help='specify input file', default='./data/in.csv')
+    parser.add_argument('-i', '--input', help='specify input file', default='./data/in3.csv')
     parser.add_argument('-o', '--output', help='specify output file', default='./data/out.csv')
 
     return parser.parse_args()
