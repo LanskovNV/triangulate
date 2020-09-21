@@ -2,6 +2,13 @@ import argparse
 import csv
 
 
+def register_launch_arguments():
+    parser = argparse.ArgumentParser(description='Serve the app')
+    parser.add_argument('-i', '--input', help='specify input file', default='./data/in.csv')
+    parser.add_argument('-o', '--output', help='specify output file', default='./data/out.csv')
+
+    return parser.parse_args()
+
 def parse_input(input_file):
     points = []
     with open(input_file) as input:
@@ -9,10 +16,6 @@ def parse_input(input_file):
         for point in vertices:
                points.append([ int(point[0]), int(point[1]) ])
     return points
-
-
-def sort_graham(vertices):
-    return []
 
 def save_ans(output_file, triangles, error):
     if error != None:
@@ -23,16 +26,11 @@ def save_ans(output_file, triangles, error):
         writer = csv.writer(output)
         writer.writerows(data)
 
+def sort_graham(vertices):
+    return []
 
 def earcut(vertices, index_sorted):
     return []
-
-def register_launch_arguments():
-    parser = argparse.ArgumentParser(description='Serve the app')
-    parser.add_argument('-i', '--input', help='specify input file', default='./data/in.csv')
-    parser.add_argument('-o', '--output', help='specify output file', default='./data/out.csv')
-
-    return parser.parse_args()
 
 if __name__ == '__main__':
     args = register_launch_arguments()
