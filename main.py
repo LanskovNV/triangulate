@@ -1,8 +1,6 @@
 import argparse
 import csv
-import numpy as np
-
-from ear import Ear
+from earcut import Earcut
 
 
 def register_launch_arguments():
@@ -29,48 +27,15 @@ def save_ans(output_file, triangles, error):
         writer = csv.writer(output)
         writer.writerows(data)
 
-# vertices shoutd go in counterclock-wise
-def earcut(vertices):
-    length = len(vertices)
-    triangles = []
-    ears = []
-
-    def find_ears():
-        i = 0
-        while True:
-            if i >= length:
-                break
-            new_ear = Ear(vertices, i)
-            if (new_ear.validate()):
-                ears.append(new_ear)
-            i += 2
-
-    
-    def update_ears(ear):
-        pass
-
-    def cut_ear():
-        ear = ears.pop(0)
-        triangles.append(ear.get_triangle())
-        update_ears(ear)
-
-    # main triangulation block
-    find_all_ears()
-    while True:
-        if len(ears) == 1:
-            add_triangle(ears[0])
-            break    
-        cut_ear()
-
-    return triangles
-
 if __name__ == '__main__':
     args = register_launch_arguments()
     error = None
 
     try:
         vertices = parse_input(args.input)
-        triangles = earcut(vertices)
+        earcut = Earcut(vertices)
+        earcut.triangulate()
+        triangles = earcut.triangles
     except ValueError:
         error = 'ERROR: Incorrect input'
 
