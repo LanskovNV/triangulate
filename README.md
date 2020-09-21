@@ -27,7 +27,17 @@ csv file with polygon vertices coords ("x" first, "y" second):
 
 ## How to use
 
-to run program, just run python script with two params:
+At first, do the following:
+1. clone repo
+2. move to project root folder
+3. execute following commands:
+```bash
+python -m venv env  # setup new virtualenv
+source env/bin/activate  # activate new virtualenv
+pip install -r requirements.txt  # install all project requirements
+```
+
+4. to run program, just run python script with two params:
 
 ```bash
 python main.py -i 'in.csv' -o 'out.csv'
@@ -38,5 +48,3 @@ python main.py -i 'in.csv' -o 'out.csv'
 ## Options
 
 `-g` - gui mode
-`-i` - manual vertices input mode
-`-h`, `--help` - print help message
