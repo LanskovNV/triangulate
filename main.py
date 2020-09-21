@@ -1,6 +1,5 @@
 import argparse
 import csv
-# import numpy as np
 
 
 def register_launch_arguments():
@@ -33,6 +32,15 @@ def earcut(vertices):
     triangles = []
     ears = []
 
+    def convert_bounds(ind):
+        length = len(vertices)
+        right_neighbour_ind = (ind + 1) % length
+        if ind == 0:
+            left_neighbour_ind = length - 1
+        else: 
+            left_neighbour_ind = ind - 1
+        return left_neighbour_ind, right_neighbour_ind
+
     def find_all_ears():
         i = 0
         length = len(vertices)
@@ -43,20 +51,9 @@ def earcut(vertices):
                 ears.append(i)
                 i += 2
 
-    def convert_bounds(ind):
-        length = len(vertices)
-        right_neighbour_ind = (ind + 1) % length
-        if ind == 0:
-            left_neighbour_ind = length - 1
-        else: 
-            left_neighbour_ind = ind - 1
-        return left_neighbour_ind, right_neighbour_ind
-
     def is_convex(vert):
         return True
 
-
-    #TODO: fix this func
     def update_ears(ind):
         left_neighbour_ind, right_neighbour_ind = convert_bounds(ind)
         if is_convex(vertices[left_neighbour_ind]):
