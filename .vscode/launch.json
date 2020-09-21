@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": [ "--input", "./data/in2.csv" ]
+            "args": [ "--input", "./data/in3.csv" ]
         }
     ]
 }
