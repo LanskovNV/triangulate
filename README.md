@@ -43,6 +43,11 @@ pip install -r requirements.txt  # install all project requirements
 python main.py -i 'in.csv' -o 'out.csv'
 ```
 
+## Optional flags
+
+ > `-t` - run tests, check out *if* block in ***main.py*** (Some autogen examples could be incorrect)
+ 
+ > `-a` - draw plot to check asymptote, check out *if* block in ***main.py***
 
 # TODO:
 ## Options
