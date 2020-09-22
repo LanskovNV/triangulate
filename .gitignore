@@ -2,7 +2,7 @@
 .idea
 data/out.csv
 .vscode
-
+bad*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
