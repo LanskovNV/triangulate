@@ -19,13 +19,12 @@ def parse_input(input_file):
     return points
 
 def save_ans(output_file, triangles, error):
-    if error != None:
-        data = [error]
-    else:
-        data = triangles
     with open(output_file, 'w', newline='', encoding='utf-8') as output:
-        writer = csv.writer(output)
-        writer.writerows(data)
+        if error != None:
+            output.write(error)
+        else:
+            writer = csv.writer(output)
+            writer.writerows(triangles)
 
 if __name__ == '__main__':
     args = register_launch_arguments()
