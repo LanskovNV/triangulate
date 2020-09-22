@@ -62,9 +62,7 @@ if __name__ == '__main__':
                 save(input_file.format(num_nodes, _), vertices, None)
                 save(output_file.format(num_nodes, _), triangles, None)
     else:
-        points = load(args.input)
-        vertices = points # Polygon(points=points).vertices
-        print(Polygon(points=points).vertices)
+        vertices = load(args.input)
         triangles, error = triangulate(vertices)
         save(args.output, triangles, error)
     
