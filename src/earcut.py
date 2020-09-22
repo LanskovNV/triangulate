@@ -27,7 +27,7 @@ class Earcut:
             if i >= self.length:
                 break
             new_ear = Ear(self.vertices, indexes, i)
-            if (new_ear.validate(self.vertices, indexes)):
+            if (new_ear.validate(self.vertices, indexes, self.ears)):
                 self.add_ear(new_ear)
                 i += 2
             else:
@@ -55,9 +55,9 @@ class Earcut:
             # check if prew and next is new ears
             prew_ear_new = Ear(self.vertices, indexes, current.prew)
             next_ear_new = Ear(self.vertices, indexes, current.next)
-            if prew_ear_new.validate(self.vertices, indexes) and prew_ear_new.index not in self.neighbours:
+            if prew_ear_new.validate(self.vertices, indexes, self.ears) and prew_ear_new.index not in self.neighbours:
                 self.add_ear(prew_ear_new)
                 continue
-            if next_ear_new.validate(self.vertices, indexes) and next_ear_new.index not in self.neighbours:
+            if next_ear_new.validate(self.vertices, indexes, self.ears) and next_ear_new.index not in self.neighbours:
                 self.add_ear(next_ear_new)
                 continue

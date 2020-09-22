@@ -38,14 +38,21 @@ class Ear:
                     return False
             return True
 
+        def is_ear_point(self, p):
+            if p == self.coords or p in self.neighbour_coords:
+                return True
+            return False
 
-        def validate(self, points, indexes):
+        def validate(self, points, indexes, ears):
             not_ear_points = []
             for i in indexes:
                 if points[i] != self.coords and points[i] not in self.neighbour_coords:
                     not_ear_points.append(points[i])
             insides = [self.is_inside(p) for p in not_ear_points]
             if self.is_convex() and True not in insides:
+                for e in ears:
+                    if e.is_ear_point(self.coords):
+                        return False
                 return True
             return False
 
