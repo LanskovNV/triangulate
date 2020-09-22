@@ -3,12 +3,12 @@
 
 ## Input
 
-csv file with polygon vertices coords ("x" first, "y" second):
+csv file with polygon vertices coords in counterclock-wise ("x" first, "y" second, *`integers only`*):
 ```csv
-1, 2
-3, 19
-5, 8
-94, 3
+1, 0
+1, 1
+0, 1
+0, 0
 ```
 
 ## Output
@@ -16,11 +16,11 @@ csv file with polygon vertices coords ("x" first, "y" second):
  1. If success, csv with triangulation:
 
  ```csv
- 1, 2, 3
- 2, 3, 4
+3,0,1
+1,2,3
  ```
 
- 2. If fault, csv file with error only:
+ 2. If fault, csv file with error only, for example:
  ```csv
  ERROR: Incorrect input data
  ```
