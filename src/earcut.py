@@ -39,6 +39,9 @@ class Earcut:
                 self.triangles.append(self.ears[0].get_triangle())
                 self.triangles.append(self.ears[1].get_triangle())
                 break
+            
+            if len(self.ears) == 0:
+                raise IndexError
             current = self.ears.pop(0)
             
             indexes.remove(current.index)

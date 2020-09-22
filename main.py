@@ -39,5 +39,7 @@ if __name__ == '__main__':
         triangles = earcut.triangles
     except ValueError:
         error = 'ERROR: Incorrect input'
+    except IndexError:
+        error = 'ERROR: Try to get ear from empty list. Possible reason: incorrect polygon vertices direction'
 
     save_ans(args.output, triangles, error)
