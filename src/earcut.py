@@ -1,4 +1,4 @@
-from ear import Ear
+from src.ear import Ear
 
 
 class Earcut:
