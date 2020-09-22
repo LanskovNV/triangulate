@@ -28,10 +28,11 @@ def save(output_file, triangles, error):
             writer = csv.writer(output)
             writer.writerows(triangles)
 
-def draw_polygon(shape):
+def draw_polygon(shape, fname):
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     shape = plt.Polygon(shape, color='g', alpha=0.3)
     ax.add_patch(shape)
     plt.plot()
-    plt.show()
+    # plt.show()
+    plt.savefig(fname)

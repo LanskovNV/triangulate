@@ -4,14 +4,14 @@ import random
 
 
 class Polygon:
-    points = []
-    vertices = []
-    n = 16
-    h = 16
-    w = 16
-
     def __init__(self, **kwargs):
         points = kwargs.get('points')
+        
+        self.points = []
+        self.vertices = []
+        self.n = 16
+        self.h = 16
+        self.w = 16
 
         if points != None:
             self.points = points

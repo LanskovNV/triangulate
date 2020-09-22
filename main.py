@@ -26,18 +26,24 @@ if __name__ == '__main__':
     if args.test:
         input_file = './data/rnd.csv'
         output_file = './data/out.csv'
-        vertices = load(input_file)
-        
-        try:
-            earcut = Earcut(vertices)
-            earcut.triangulate()
-            triangles = earcut.triangles
-        except ValueError:
-            error = 'ERROR: Incorrect input'
-        except IndexError:
-            error = 'ERROR: Try to get ear from empty list. Possible reason: incorrect polygon vertices direction'
+        polygon_file = './data/rnd.png'
+        num_nodes = 7
+
+        for _ in range(100):
+            vertices = Polygon(n=num_nodes, w=100, h=100).vertices
+            draw_polygon(vertices, polygon_file)
+            save(input_file, vertices, None)
             
-        save(output_file, triangles, None)
+        # vertices = load(input_file)
+
+            triangles, error = triangulate(vertices)
+            if len(triangles) == num_nodes - 2:
+                print('OK')
+            else:
+                print('Incorrect triangulation')
+                break
+            save(output_file, triangles, None)
+
         # p = Polygon(n=5, w=10, h=10)
         # save(fname, p.vertices, None)
         # vertices = p.vertices

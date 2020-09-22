@@ -2,12 +2,11 @@ from src.ear import Ear
 
 
 class Earcut:
-    vertices = []
-    ears = []
-    neighbours = []
-    triangles = []
-
     def __init__(self, points): 
+        self.vertices = []
+        self.ears = []
+        self.neighbours = []
+        self.triangles = []
         self.vertices = points
         self.length = len(points)
     
