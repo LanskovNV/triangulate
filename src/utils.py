@@ -8,6 +8,7 @@ def register_launch_arguments():
     parser.add_argument('-i', '--input', help='specify input file', default='./data/in.csv')
     parser.add_argument('-o', '--output', help='specify output file', default='./data/out.csv')
     parser.add_argument('-t', '--test', help='run tests', action='store_true')
+    parser.add_argument('-a', '--asymptote', help='asymptote check', action='store_true')
 
     return parser.parse_args()
 

@@ -58,7 +58,9 @@ class Polygon:
         self.vertices.sort(key=cmp_to_key(sort_by_angle))
     
     def generate(self):
-        for _ in range(self.n):
-            self.points.append([random.randint(1, self.w), random.randint(1, self.h)])
+        while len(self.points) != self.n:
+            new_p = [random.randint(0, self.w), random.randint(0, self.h)]
+            if new_p not in self.points:
+                self.points.append(new_p)
     
     

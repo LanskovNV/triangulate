@@ -1,8 +1,12 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import os
 from src.earcut import Earcut
 from src.polygon import Polygon
 from src.utils import register_launch_arguments
 from src.utils import load, save
 from src.utils import draw_polygon
+import time
 
 
 def triangulate(vertices):
@@ -23,33 +27,44 @@ def triangulate(vertices):
 if __name__ == '__main__':
     args = register_launch_arguments()
 
-    if args.test:
-        input_file = './data/rnd.csv'
-        output_file = './data/out.csv'
-        polygon_file = './data/rnd.png'
-        num_nodes = 7
+    if args.asymptote:
+        nodes = [4, 8, 16, 32, 64, 128, 256]
+        times = []
+        for n in nodes:
+            vertices = Polygon(n=n, w=100, h=100).vertices
+            tic = time.perf_counter()
+            triangles, error = triangulate(vertices)
+            toc = time.perf_counter()
+            times.append(toc - tic)
+            print(n)
+        plt.plot(np.log(nodes), np.log(times))
+        plt.plot([2, 8], [-10, 2], 'r')
+        plt.show()
+        
+    elif args.test:
+        num_nodes = 10
+        subdir = f'./data/bad_{num_nodes}'
+        input_file = './data/bad_{}/rnd_{}.csv'
+        output_file = './data/bad_{}/out_{}.csv'
+        polygon_file = './data/bad_{}/rnd_{}.png'
+
+        if not os.path.exists(subdir):
+            os.makedirs(subdir)
 
         for _ in range(100):
             vertices = Polygon(n=num_nodes, w=100, h=100).vertices
-            draw_polygon(vertices, polygon_file)
-            save(input_file, vertices, None)
-            
-        # vertices = load(input_file)
-
             triangles, error = triangulate(vertices)
             if len(triangles) == num_nodes - 2:
                 print('OK')
             else:
-                print('Incorrect triangulation')
-                break
-            save(output_file, triangles, None)
-
-        # p = Polygon(n=5, w=10, h=10)
-        # save(fname, p.vertices, None)
-        # vertices = p.vertices
+                print('Incorrect triangulation: same vertices or bad order with intersections')
+                draw_polygon(vertices, polygon_file.format(num_nodes, _))
+                save(input_file.format(num_nodes, _), vertices, None)
+                save(output_file.format(num_nodes, _), triangles, None)
     else:
         points = load(args.input)
-        vertices = Polygon(points=points).vertices
+        vertices = points # Polygon(points=points).vertices
+        print(Polygon(points=points).vertices)
         triangles, error = triangulate(vertices)
         save(args.output, triangles, error)
     
