@@ -29,7 +29,9 @@ class Earcut:
             new_ear = Ear(self.vertices, indexes, i)
             if (new_ear.validate(self.vertices, indexes)):
                 self.add_ear(new_ear)
-            i += 2        
+                i += 2
+            else:
+                i += 1        
 
     def triangulate(self):
         indexes = list(range(self.length))
