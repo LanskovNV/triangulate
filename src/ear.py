@@ -24,19 +24,31 @@ class Ear:
             ]
         
         def is_inside(self, point):
-            det = []
-            a = [point[0], point[1], 1]
-            b = [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1]
-            c = [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1]
+            d1 = [
+                [point[0], point[1], 1],
+                [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1],
+                [self.coords[0], self.coords[1], 1],
+            ]
+            d2 = [
+                [point[0], point[1], 1],
+                [self.coords[0], self.coords[1], 1],
+                [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1],
+            ]
+            d3 = [
+                [point[0], point[1], 1],
+                [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1],
+                [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1],
+            ]
+            det = [np.linalg.det(d1), np.linalg.det(d2), np.linalg.det(d3)]
             
-            det.append([a, b, c])
-            det.append([b, c, a])
-            det.append([c, a, b])
-            
+            cnt = 0
             for d in det:
-                if np.linalg.det(d) > 0:
-                    return False
-            return True
+                if d > 0:
+                    cnt += 1
+
+            if cnt == 3:
+                return True
+            return False
 
         def is_ear_point(self, p):
             if p == self.coords or p in self.neighbour_coords:
