@@ -1,9 +1,11 @@
 import math
-import numpy as np
 import random
 
 
 class Polygon:
+    """
+        Class used for testing only
+    """
     def __init__(self, **kwargs):
         points = kwargs.get('points')
         
@@ -25,8 +27,6 @@ class Polygon:
             self.generate()
 
         self.sort()
-
-        
 
     def sort(self):
         center_point = [self.w / 2, self.h / 2]
