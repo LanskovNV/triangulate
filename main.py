@@ -30,7 +30,8 @@ def save_ans(output_file, triangles, error):
 if __name__ == '__main__':
     args = register_launch_arguments()
     error = None
-
+    triangles = []
+    
     try:
         vertices = parse_input(args.input)
         earcut = Earcut(vertices)
