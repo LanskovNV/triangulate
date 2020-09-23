@@ -12,14 +12,16 @@ def register_launch_arguments():
 
     return parser.parse_args()
 
+
 def load(input_file):
     points = []
     with open(input_file) as input:
         vertices = csv.reader(input)
         for point in vertices:
-               points.append([ int(point[0]), int(point[1]) ])
+            points.append([int(point[0]), int(point[1])])
 
     return points
+
 
 def save(output_file, triangles, error):
     with open(output_file, 'w', newline='', encoding='utf-8') as output:
@@ -28,6 +30,7 @@ def save(output_file, triangles, error):
         else:
             writer = csv.writer(output)
             writer.writerows(triangles)
+
 
 def draw_polygon(shape, fname):
     fig = plt.figure()

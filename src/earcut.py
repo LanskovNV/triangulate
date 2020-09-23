@@ -26,7 +26,7 @@ class Earcut:
             if i >= self.length:
                 break
             new_ear = Ear(self.vertices, indexes, i)
-            if (new_ear.validate(self.vertices, indexes, self.ears)):
+            if new_ear.validate(self.vertices, indexes, self.ears):
                 self.add_ear(new_ear)
                 i += 2
             else:

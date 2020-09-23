@@ -21,8 +21,9 @@ def triangulate(vertices):
         error = 'ERROR: Incorrect input'
     except IndexError:
         error = 'ERROR: Try to get ear from empty list. Possible reason: incorrect polygon vertices direction'
-    
+
     return triangles, error
+
 
 if __name__ == '__main__':
     args = register_launch_arguments()
@@ -40,7 +41,7 @@ if __name__ == '__main__':
         plt.plot(np.log(nodes), np.log(times))
         plt.plot([2, 8], [-10, 2], 'r')
         plt.show()
-        
+
     elif args.test:
         num_nodes = 10
         subdir = f'./data/bad_{num_nodes}'
@@ -65,4 +66,3 @@ if __name__ == '__main__':
         vertices = load(args.input)
         triangles, error = triangulate(vertices)
         save(args.output, triangles, error)
-    
