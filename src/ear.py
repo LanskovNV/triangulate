@@ -73,7 +73,7 @@ class Ear:
             b = [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1]
             c = [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1]
             
-            if np.linalg.det([b, a, c]) < 0:
+            if np.linalg.det([b, a, c]) <= 0:
                 return False
             return True
 
