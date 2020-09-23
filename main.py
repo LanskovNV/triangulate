@@ -43,9 +43,9 @@ if __name__ == '__main__':
         plt.show()
 
     elif args.test:
-        num_nodes = 10
+        num_nodes = 11
         pull_dim = 100
-        iterations = 100
+        iterations = 1000
         subdir = f'./data/bad_{num_nodes}'
         input_file = './data/bad_{}/rnd_{}.csv'
         output_file = './data/bad_{}/out_{}.csv'
