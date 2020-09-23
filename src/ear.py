@@ -43,7 +43,7 @@ class Ear:
 
         cnt = 0
         for d in det:
-            if d > 0:
+            if d >= 0:
                 cnt += 1
 
         if cnt == 3:
