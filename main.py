@@ -44,6 +44,8 @@ if __name__ == '__main__':
 
     elif args.test:
         num_nodes = 10
+        pull_dim = 100
+        iterations = 100
         subdir = f'./data/bad_{num_nodes}'
         input_file = './data/bad_{}/rnd_{}.csv'
         output_file = './data/bad_{}/out_{}.csv'
@@ -52,8 +54,8 @@ if __name__ == '__main__':
         if not os.path.exists(subdir):
             os.makedirs(subdir)
 
-        for _ in range(100):
-            vertices = Polygon(n=num_nodes, w=100, h=100).vertices
+        for _ in range(iterations):
+            vertices = Polygon(n=num_nodes, w=pull_dim, h=pull_dim).vertices
             triangles, error = triangulate(vertices)
             if len(triangles) == num_nodes - 2:
                 print('OK')
