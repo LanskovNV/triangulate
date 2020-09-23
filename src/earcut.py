@@ -35,7 +35,16 @@ class Earcut:
     def triangulate(self):
         indexes = list(range(self.length))
         self.find_ears()
-        while True:
+        
+        num_of_ears = len(self.ears)
+
+        if num_of_ears == 0:
+            raise ValueError
+        if num_of_ears == 1:
+            self.triangles.append(self.ears[0].get_triangle())
+            return 
+
+        while True:   
             if len(self.ears) == 2 and len(indexes) == 4:
                 self.triangles.append(self.ears[0].get_triangle())
                 self.triangles.append(self.ears[1].get_triangle())
