@@ -6,16 +6,17 @@ class Polygon:
     """
         Class used for testing only
     """
+
     def __init__(self, **kwargs):
         points = kwargs.get('points')
-        
+
         self.points = []
         self.vertices = []
         self.n = 16
         self.h = 16
         self.w = 16
 
-        if points != None:
+        if points is not None:
             self.points = points
         else:
             n = kwargs.get('n')
@@ -41,26 +42,31 @@ class Polygon:
             class K:
                 def __init__(self, obj, *args):
                     self.obj = obj
+
                 def __lt__(self, other):
                     return mycmp(self.obj, other.obj) < 0
+
                 def __gt__(self, other):
                     return mycmp(self.obj, other.obj) > 0
+
                 def __eq__(self, other):
                     return mycmp(self.obj, other.obj) == 0
+
                 def __le__(self, other):
                     return mycmp(self.obj, other.obj) <= 0
+
                 def __ge__(self, other):
                     return mycmp(self.obj, other.obj) >= 0
+
                 def __ne__(self, other):
                     return mycmp(self.obj, other.obj) != 0
+
             return K
 
         self.vertices.sort(key=cmp_to_key(sort_by_angle))
-    
+
     def generate(self):
         while len(self.points) != self.n:
             new_p = [random.randint(0, self.w), random.randint(0, self.h)]
             if new_p not in self.points:
                 self.points.append(new_p)
-    
-    
