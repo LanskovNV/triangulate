@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class Ear:
     index = 0
     prew = 0
@@ -24,31 +21,21 @@ class Ear:
         ]
 
     def is_inside(self, point):
-        d1 = [
-            [point[0], point[1], 1],
-            [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1],
-            [self.coords[0], self.coords[1], 1],
+        p1 = self.coords
+        p2 = self.neighbour_coords[0]
+        p3 = self.neighbour_coords[1]
+        p0 = point
+        
+        d = [
+            (p1[0] - p0[0]) * (p2[1] - p1[1]) - (p2[0] - p1[0]) * (p1[1] - p0[1]),
+            (p2[0] - p0[0]) * (p3[1] - p2[1]) - (p3[0] - p2[0]) * (p2[1] - p0[1]),
+            (p3[0] - p0[0]) * (p1[1] - p3[1]) - (p1[0] - p3[0]) * (p3[1] - p0[1])
         ]
-        d2 = [
-            [point[0], point[1], 1],
-            [self.coords[0], self.coords[1], 1],
-            [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1],
-        ]
-        d3 = [
-            [point[0], point[1], 1],
-            [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1],
-            [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1],
-        ]
-        det = [np.linalg.det(d1), np.linalg.det(d2), np.linalg.det(d3)]
 
-        cnt = 0
-        for d in det:
-            if d >= 0:
-                cnt += 1
-
-        if cnt == 3:
+        if d[0] * d[1] >= 0 and d[2] * d[1] >= 0 and d[0] * d[2] >= 0:
             return True
         return False
+
 
     def is_ear_point(self, p):
         if p == self.coords or p in self.neighbour_coords:
@@ -69,11 +56,12 @@ class Ear:
         return False
 
     def is_convex(self):
-        a = [self.coords[0], self.coords[1], 1]
-        b = [self.neighbour_coords[0][0], self.neighbour_coords[0][1], 1]
-        c = [self.neighbour_coords[1][0], self.neighbour_coords[1][1], 1]
-
-        if np.linalg.det([b, a, c]) <= 0:
+        a = self.neighbour_coords[0]
+        b = self.coords
+        c = self.neighbour_coords[1]
+        ab = [b[0] - a[0], b[1] - a[1]]
+        bc = [c[0] - b[0], c[1] - b[1]]
+        if ab[0] * bc[1] - ab[1] * bc[0] <= 0:
             return False
         return True
 
